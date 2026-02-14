@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestro Amor ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+    background:linear-gradient(to top,#ff9a9e,#fad0c4,#fbc2eb);
+    animation:sunset 8s infinite alternate;
+}
+@keyframes sunset{
+    from{background:linear-gradient(to top,#ff9a9e,#fad0c4,#fbc2eb);}
+    to{background:linear-gradient(to top,#fbc2eb,#ff9a9e);}
+}
+
+.container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:40px;
+    height:100vh;
+    flex-wrap:wrap;
+}
+
+.photo{
+    width:30%;
+}
+.photo img{
+    width:100%;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+
+.text-section{
+    width:40%;
+    color:#4a0033;
+}
+h1{color:#cc0066;}
+#counter{font-size:20px;margin:15px 0;}
+#typing{font-size:18px;min-height:80px;}
+
+.tree{
+    position:relative;
+    width:200px;
+    height:300px;
+}
+.trunk{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    width:30px;
+    height:150px;
+    background:#8b5a2b;
+    transform:translateX(-50%);
+    border-radius:10px;
+}
+.leaf{
+    position:absolute;
+    width:25px;
+    height:25px;
+    transform:rotate(45deg);
+    animation:float 3s infinite alternate ease-in-out;
+}
+.leaf:before,.leaf:after{
+    content:"";
+    position:absolute;
+    width:25px;
+    height:25px;
+    background:inherit;
+    border-radius:50%;
+}
+.leaf:before{top:-12px;}
+.leaf:after{left:-12px;}
+
+@keyframes float{
+    from{transform:rotate(45deg) translateY(0);}
+    to{transform:rotate(45deg) translateY(-10px);}
+}
+
+.petal{
+    position:absolute;
+    top:-20px;
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    to{transform:translateY(100vh) rotate(360deg);}
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    background:#ff0066;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    justify-content:center;
+    align-items:center;
+}
+.modal-content{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+}
+
+/* Propuesta */
+.propuesta{
+    position:fixed;
+    bottom:-200px;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    padding:20px 40px;
+    border-radius:30px;
+    font-size:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    transition:1s;
+}
+.propuesta.show{
+    bottom:50px;
+}
+
+/* Responsive */
+@media(max-width:900px){
+    .container{flex-direction:column;}
+    .photo,.text-section{width:90%;}
+}
+.petal{
+    position:fixed;
+    top:-20px;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    animation:fall linear infinite;
+    pointer-events:none;
+    z-index:1;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110dvh) rotate(360deg);
+    }
+}
+
+.click-heart{
+    position:fixed;
+    font-size:20px;
+    pointer-events:none;
+    transition:transform 1s ease, opacity 1s ease;
+    z-index:999;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="photo">
+<img src="foto tania y esteban.jpeg">
+</div>
+
+<div class="text-section">
+<h1>❤️ Nuestro Amor ❤️</h1>
+<div id="counter"></div>
+<div id="typing"></div>
+<button onclick="mostrarSorpresa()">💌 Sorpresa</button>
+<button onclick="activarPropuesta()">💍 Propuesta</button>
+</div>
+
+<div class="tree">
+<div class="trunk"></div>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h2>Te amo infinitamente ❤️</h2>
+<p>Gracias por ser mi compañera de vida y aventuras 🌎</p>
+<button onclick="cerrar()">Cerrar</button>
+</div>
+</div>
+
+<div class="propuesta" id="propuesta">
+¿Quieres seguir construyendo nuestra historia para siempre? 💍❤️
+<button onclick="cerrardiv()">Cerrar</button>
+</div>
+
+<!-- Música -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g"
+allow="autoplay">
+</iframe>
+
+<script>
+// CONTADOR
+// PETALOS
+const coloresss = ["#ff4d88","#ff0066","#ff6699","#ff1a75"];
+
+function crearPetalo(){
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.style.left = Math.random()*100+"vw";
+    petal.style.background = coloress[Math.floor(Math.random()*coloress.length)];
+    petal.style.animationDuration = (5+Math.random()*5)+"s";
+    document.body.appendChild(petal);
+
+    setTimeout(()=>petal.remove(),10000);
+}
+
+setInterval(crearPetalo,500);
+
+document.addEventListener("touchstart", explosion);
+document.addEventListener("click", explosion);
+
+function explosion(e){
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+    for(let i=0;i<8;i++){
+        const heart = document.createElement("div");
+        heart.classList.add("click-heart");
+        heart.innerHTML="❤️";
+        heart.style.left = x+"px";
+        heart.style.top = y+"px";
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.style.transform =
+              `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px) scale(1.5)`;
+            heart.style.opacity=0;
+        },10);
+
+        setTimeout(()=>heart.remove(),1000);
+    }
+}
+
+/*function calcularDias(){
+const inicio=new Date("2024-01-12");
+const hoy=new Date();
+const dias=Math.floor((hoy-inicio)/(1000*60*60*24));
+document.getElementById("counter").innerText=
+"Han pasado "+dias+" días desde el 12 de enero de 2024 💕";
+}
+calcularDias();*/
+
+function actualizarContador(){
+    const inicio = new Date("2024-01-12T00:00:00");
+    const ahora = new Date();
+
+    let diferencia = ahora - inicio;
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    diferencia -= dias * (1000 * 60 * 60 * 24);
+
+    const horas = Math.floor(diferencia / (1000 * 60 * 60));
+    diferencia -= horas * (1000 * 60 * 60);
+
+    const minutos = Math.floor(diferencia / (1000 * 60));
+    diferencia -= minutos * (1000 * 60);
+
+    const segundos = Math.floor(diferencia / 1000);
+
+    document.getElementById("counter").innerText =
+        `${dias} días ${horas}h ${minutos}m ${segundos}s juntos 💕`;
+}
+
+// Ejecutar inmediatamente
+actualizarContador();
+
+// Actualizar cada segundo
+setInterval(actualizarContador, 1000);
+
+
+// TEXTO
+const texto="Desde que te conocí eres la persona más importante en mi vida, mi compañera de vida y de viajes, cómo disfruto estar a tu lado ❤️";
+let i=0;
+function escribir(){
+if(i<texto.length){
+document.getElementById("typing").innerHTML+=texto.charAt(i);
+i++;
+setTimeout(escribir,40);
+}}
+escribir();
+
+// HOJAS
+const tree=document.querySelector(".tree");
+const coloress=["#ff4d88","#ff0066","#ff6699","#ff1a75"];
+for(let i=0;i<30;i++){
+let leaf=document.createElement("div");
+leaf.classList.add("leaf");
+leaf.style.background=coloress[Math.floor(Math.random()*coloress.length)];
+leaf.style.top=Math.random()*150+"px";
+leaf.style.left=Math.random()*200+"px";
+tree.appendChild(leaf);
+}
+
+// PETALOS
+for(let i=0;i<40;i++){
+let petal=document.createElement("div");
+petal.classList.add("petal");
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(5+Math.random()*5)+"s";
+petal.style.background=coloress[Math.floor(Math.random()*coloress.length)];
+document.body.appendChild(petal);
+}
+
+// CORAZONES EXPLOSIVOS
+document.addEventListener("click",function(e){
+for(let i=0;i<8;i++){
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.style.position="absolute";
+heart.style.left=e.pageX+"px";
+heart.style.top=e.pageY+"px";
+heart.style.fontSize="20px";
+heart.style.transition="1s";
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.style.transform=`translate(${(Math.random()*200-100)}px,${(Math.random()*200-100)}px)`;
+heart.style.opacity=0;
+},10);
+
+setTimeout(()=>heart.remove(),1000);
+}
+});
+
+// MODAL
+function mostrarSorpresa(){
+document.getElementById("modal").style.display="flex";
+}
+function cerrar(){
+document.getElementById("modal").style.display="none";
+}
+function cerrardiv(){
+document.getElementById("propuesta").style.display="none";
+}
+
+// PROPUESTA
+function activarPropuesta(){
+document.getElementById("propuesta").classList.add("show");
+}
+</script>
+
+</body>
+</html>
